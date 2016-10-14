@@ -12,9 +12,8 @@
 
 @property (nonatomic, assign) CGFloat minification;
 
-/**
- *  从代理传过来的负责交互对象，手势的时候更新
- */
-//@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
+@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
+
+@property (nonatomic, assign) CGFloat offset;
 
 @end

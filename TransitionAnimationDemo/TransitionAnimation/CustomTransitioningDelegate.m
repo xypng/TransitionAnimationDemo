@@ -20,7 +20,7 @@
  */
 @property (nonatomic, assign) CGFloat minification;
 
-@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
+@property (nonatomic, strong) CustomPresentationController *presentation;
 
 @end
 
@@ -32,7 +32,6 @@
         _offset = offset;
         _transigionDirection = direction;
         _minification = minification;
-        _interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
     }
     return self;
 }
@@ -52,15 +51,15 @@
 //
 //}
 
-//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
-//    return self.interactiveTransition;
-//}
+- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
+    return self.presentation.interactiveTransition;
+}
 
 - (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source NS_AVAILABLE_IOS(8_0) {
-    CustomPresentationController *presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
-    presentation.minification = self.minification;
-//    presentation.interactiveTransition = self.interactiveTransition;
-    return presentation;
+    self.presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+    self.presentation.minification = self.minification;
+    self.presentation.offset = self.offset;
+    return self.presentation;
 }
 
 @end
