@@ -2,7 +2,7 @@
 //  PresentedViewController.m
 //  TransitionAnimationDemo
 //
-//  Created by XiaoYiPeng on 16/10/13.
+//  Created by XiaoYiPeng on 16/10/14.
 //  Copyright © 2016年 XiaoYiPeng. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 @interface PresentedViewController ()
 
-@property (nonatomic , strong) CustomTransitioningDelegate *delegate;
+@property (nonatomic, strong) CustomTransitioningDelegate *delegate;
 
 @end
 
@@ -20,13 +20,17 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
+
         self.modalPresentationStyle = UIModalPresentationCustom;
 
-        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:100 andDirection:Bottom];
+        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:200 andDirection:Right];
         self.transitioningDelegate = self.delegate;
     }
     return self;
+}
+
+- (IBAction)dismiss:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad {

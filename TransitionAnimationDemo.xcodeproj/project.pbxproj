@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE05515F1DB0B6FF0097BC74 /* PresentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05515D1DB0B6FF0097BC74 /* PresentedViewController.m */; };
+		AE0551601DB0B6FF0097BC74 /* PresentedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE05515E1DB0B6FF0097BC74 /* PresentedViewController.xib */; };
 		AEE9BB361DAF81310071395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB351DAF81310071395A /* main.m */; };
 		AEE9BB391DAF81310071395A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB381DAF81310071395A /* AppDelegate.m */; };
 		AEE9BB3F1DAF81310071395A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEE9BB3D1DAF81310071395A /* Main.storyboard */; };
 		AEE9BB411DAF81310071395A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEE9BB401DAF81310071395A /* Assets.xcassets */; };
 		AEE9BB441DAF81310071395A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEE9BB421DAF81310071395A /* LaunchScreen.storyboard */; };
 		AEE9BB4D1DAF81790071395A /* PresentingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB4C1DAF81790071395A /* PresentingViewController.m */; };
-		AEE9BB571DAF83070071395A /* PresentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB551DAF83070071395A /* PresentedViewController.m */; };
 		AEE9BB5C1DAF83C00071395A /* CustomAnimatedTranstitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB5B1DAF83C00071395A /* CustomAnimatedTranstitioning.m */; };
 		AEE9BB5F1DAF84350071395A /* CustomTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB5E1DAF84350071395A /* CustomTransitioningDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE05515C1DB0B6FF0097BC74 /* PresentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentedViewController.h; sourceTree = "<group>"; };
+		AE05515D1DB0B6FF0097BC74 /* PresentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentedViewController.m; sourceTree = "<group>"; };
+		AE05515E1DB0B6FF0097BC74 /* PresentedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentedViewController.xib; sourceTree = "<group>"; };
 		AEE9BB311DAF81310071395A /* TransitionAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEE9BB351DAF81310071395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AEE9BB371DAF81310071395A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -29,8 +33,6 @@
 		AEE9BB451DAF81310071395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEE9BB4B1DAF81790071395A /* PresentingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingViewController.h; sourceTree = "<group>"; };
 		AEE9BB4C1DAF81790071395A /* PresentingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingViewController.m; sourceTree = "<group>"; };
-		AEE9BB541DAF83070071395A /* PresentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentedViewController.h; sourceTree = "<group>"; };
-		AEE9BB551DAF83070071395A /* PresentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentedViewController.m; sourceTree = "<group>"; };
 		AEE9BB5A1DAF83C00071395A /* CustomAnimatedTranstitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnimatedTranstitioning.h; sourceTree = "<group>"; };
 		AEE9BB5B1DAF83C00071395A /* CustomAnimatedTranstitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnimatedTranstitioning.m; sourceTree = "<group>"; };
 		AEE9BB5D1DAF84340071395A /* CustomTransitioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTransitioningDelegate.h; sourceTree = "<group>"; };
@@ -72,8 +74,9 @@
 				AEE9BB381DAF81310071395A /* AppDelegate.m */,
 				AEE9BB4B1DAF81790071395A /* PresentingViewController.h */,
 				AEE9BB4C1DAF81790071395A /* PresentingViewController.m */,
-				AEE9BB541DAF83070071395A /* PresentedViewController.h */,
-				AEE9BB551DAF83070071395A /* PresentedViewController.m */,
+				AE05515C1DB0B6FF0097BC74 /* PresentedViewController.h */,
+				AE05515D1DB0B6FF0097BC74 /* PresentedViewController.m */,
+				AE05515E1DB0B6FF0097BC74 /* PresentedViewController.xib */,
 				AEE9BB3D1DAF81310071395A /* Main.storyboard */,
 				AEE9BB401DAF81310071395A /* Assets.xcassets */,
 				AEE9BB421DAF81310071395A /* LaunchScreen.storyboard */,
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEE9BB441DAF81310071395A /* LaunchScreen.storyboard in Resources */,
+				AE0551601DB0B6FF0097BC74 /* PresentedViewController.xib in Resources */,
 				AEE9BB411DAF81310071395A /* Assets.xcassets in Resources */,
 				AEE9BB3F1DAF81310071395A /* Main.storyboard in Resources */,
 			);
@@ -174,9 +178,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEE9BB4D1DAF81790071395A /* PresentingViewController.m in Sources */,
-				AEE9BB571DAF83070071395A /* PresentedViewController.m in Sources */,
 				AEE9BB391DAF81310071395A /* AppDelegate.m in Sources */,
 				AEE9BB361DAF81310071395A /* main.m in Sources */,
+				AE05515F1DB0B6FF0097BC74 /* PresentedViewController.m in Sources */,
 				AEE9BB5C1DAF83C00071395A /* CustomAnimatedTranstitioning.m in Sources */,
 				AEE9BB5F1DAF84350071395A /* CustomTransitioningDelegate.m in Sources */,
 			);
@@ -327,6 +331,7 @@
 				AEE9BB4A1DAF81310071395A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

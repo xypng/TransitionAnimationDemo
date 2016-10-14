@@ -113,6 +113,7 @@
         UIView *dimmingView = [[UIView alloc] initWithFrame:containerView.bounds];
         dimmingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
         dimmingView.center = containerView.center;
+        dimmingView.tag = 101;
         [containerView addSubview:dimmingView];
 
         //只有present时,toView才要加到containerView上, dismiss时不用
@@ -127,7 +128,11 @@
         }];
     }
     if (fromVC.isBeingDismissed) {
+        UIView *dimmingView = [containerView viewWithTag:101];
         [UIView animateWithDuration:duration animations:^{
+            if (dimmingView) {
+                dimmingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
+            }
             fromView.transform = presentedViewTransform;
         } completion:^(BOOL finished) {
             BOOL isCancle = [transitionContext transitionWasCancelled];
