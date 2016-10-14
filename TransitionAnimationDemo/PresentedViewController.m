@@ -21,9 +21,9 @@
     self = [super init];
     if (self) {
         
-        self.modalTransitionStyle = UIModalPresentationCustom;
+        self.modalPresentationStyle = UIModalPresentationCustom;
 
-        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:100 andDirection:Right];
+        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:100 andDirection:Bottom];
         self.transitioningDelegate = self.delegate;
     }
     return self;
