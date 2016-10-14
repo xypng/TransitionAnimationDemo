@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AE05515F1DB0B6FF0097BC74 /* PresentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05515D1DB0B6FF0097BC74 /* PresentedViewController.m */; };
 		AE0551601DB0B6FF0097BC74 /* PresentedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE05515E1DB0B6FF0097BC74 /* PresentedViewController.xib */; };
+		AE0551631DB0BE5D0097BC74 /* CustomPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0551621DB0BE5D0097BC74 /* CustomPresentationController.m */; };
 		AEE9BB361DAF81310071395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB351DAF81310071395A /* main.m */; };
 		AEE9BB391DAF81310071395A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9BB381DAF81310071395A /* AppDelegate.m */; };
 		AEE9BB3F1DAF81310071395A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEE9BB3D1DAF81310071395A /* Main.storyboard */; };
@@ -23,6 +24,8 @@
 		AE05515C1DB0B6FF0097BC74 /* PresentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentedViewController.h; sourceTree = "<group>"; };
 		AE05515D1DB0B6FF0097BC74 /* PresentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentedViewController.m; sourceTree = "<group>"; };
 		AE05515E1DB0B6FF0097BC74 /* PresentedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentedViewController.xib; sourceTree = "<group>"; };
+		AE0551611DB0BE5D0097BC74 /* CustomPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPresentationController.h; sourceTree = "<group>"; };
+		AE0551621DB0BE5D0097BC74 /* CustomPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPresentationController.m; sourceTree = "<group>"; };
 		AEE9BB311DAF81310071395A /* TransitionAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEE9BB351DAF81310071395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AEE9BB371DAF81310071395A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -97,10 +100,12 @@
 		AEE9BB591DAF83230071395A /* TransitionAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				AEE9BB5A1DAF83C00071395A /* CustomAnimatedTranstitioning.h */,
-				AEE9BB5B1DAF83C00071395A /* CustomAnimatedTranstitioning.m */,
 				AEE9BB5D1DAF84340071395A /* CustomTransitioningDelegate.h */,
 				AEE9BB5E1DAF84350071395A /* CustomTransitioningDelegate.m */,
+				AEE9BB5A1DAF83C00071395A /* CustomAnimatedTranstitioning.h */,
+				AEE9BB5B1DAF83C00071395A /* CustomAnimatedTranstitioning.m */,
+				AE0551611DB0BE5D0097BC74 /* CustomPresentationController.h */,
+				AE0551621DB0BE5D0097BC74 /* CustomPresentationController.m */,
 			);
 			path = TransitionAnimation;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0551631DB0BE5D0097BC74 /* CustomPresentationController.m in Sources */,
 				AEE9BB4D1DAF81790071395A /* PresentingViewController.m in Sources */,
 				AEE9BB391DAF81310071395A /* AppDelegate.m in Sources */,
 				AEE9BB361DAF81310071395A /* main.m in Sources */,

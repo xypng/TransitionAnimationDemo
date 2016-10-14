@@ -23,7 +23,7 @@
 
         self.modalPresentationStyle = UIModalPresentationCustom;
 
-        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:200 andDirection:Right];
+        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:100 andDirection:Right andMinification:0.95];
         self.transitioningDelegate = self.delegate;
     }
     return self;
@@ -32,25 +32,5 @@
 - (IBAction)dismiss:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

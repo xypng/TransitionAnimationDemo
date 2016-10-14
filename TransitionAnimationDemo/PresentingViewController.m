@@ -13,7 +13,6 @@
 
 - (IBAction)present:(UIButton *)sender {
     PresentedViewController *presentedVC = [[PresentedViewController alloc] init];
-    presentedVC.view.backgroundColor = [UIColor greenColor];
     [self presentViewController:presentedVC animated:YES completion:nil];
 }
 

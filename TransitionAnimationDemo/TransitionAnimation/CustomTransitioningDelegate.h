@@ -11,6 +11,6 @@
 
 @interface CustomTransitioningDelegate : NSObject <UIViewControllerTransitioningDelegate>
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction;
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification;
 
 @end

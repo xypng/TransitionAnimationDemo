@@ -7,6 +7,7 @@
 //
 
 #import "CustomTransitioningDelegate.h"
+#import "CustomPresentationController.h"
 
 @interface CustomTransitioningDelegate ()
 
@@ -14,15 +15,24 @@
 
 @property (nonatomic, assign) Direction transigionDirection;
 
+/**
+ *  缩小率
+ */
+@property (nonatomic, assign) CGFloat minification;
+
+@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
+
 @end
 
 @implementation CustomTransitioningDelegate
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction {
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification {
     self = [super init];
     if (self) {
         _offset = offset;
         _transigionDirection = direction;
+        _minification = minification;
+        _interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
     }
     return self;
 }
@@ -38,8 +48,19 @@
     return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
 }
 
-//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator;
+//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator {
 //
-//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator;
+//}
+
+//- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
+//    return self.interactiveTransition;
+//}
+
+- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source NS_AVAILABLE_IOS(8_0) {
+    CustomPresentationController *presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+    presentation.minification = self.minification;
+//    presentation.interactiveTransition = self.interactiveTransition;
+    return presentation;
+}
 
 @end
