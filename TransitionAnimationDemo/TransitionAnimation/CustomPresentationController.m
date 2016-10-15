@@ -55,6 +55,7 @@
 - (void)panRecognizer:(UIPanGestureRecognizer *)gesture {
     CGFloat xOffset = [gesture translationInView:self.presentedViewController.view].x;
     CGFloat percent = xOffset/((self.containerView.bounds.size.width-self.offset)-self.gestureBeginX);
+    percent = MIN(1, MAX(0, percent));
     NSLog(@"percent: %.2f", percent);
 
     switch (gesture.state) {
