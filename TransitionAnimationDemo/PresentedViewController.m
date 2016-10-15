@@ -11,8 +11,9 @@
 
 @interface PresentedViewController ()
 
-@property (nonatomic, strong) CustomTransitioningDelegate *delegate;
-
+/**
+ *  手势起始的x位置
+ */
 @property (nonatomic, assign) CGFloat gestureBeginX;
 
 @end
@@ -46,7 +47,7 @@
     CGFloat xOffset = [gesture translationInView:self.presentedViewController.view].x;
     CGFloat percent = xOffset/((self.view.bounds.size.width)-self.gestureBeginX);
     percent = MIN(1, MAX(0, percent));
-    NSLog(@"percent: %.2f", percent);
+    NSLog(@"Dismiss Percent: %.2f", percent);
 
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:

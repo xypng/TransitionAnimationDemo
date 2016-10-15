@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class CustomTransitioningDelegate;
+
 @interface PresentedViewController : UIViewController
+
+@property (nonatomic, strong) CustomTransitioningDelegate *delegate;
 
 @end
