@@ -23,7 +23,7 @@
 
         self.modalPresentationStyle = UIModalPresentationCustom;
 
-        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:100 andDirection:Right andMinification:0.95];
+        self.delegate = [[CustomTransitioningDelegate alloc] initWithOffset:100 andDirection:Right andMinification:1.0];
         self.transitioningDelegate = self.delegate;
     }
     return self;
