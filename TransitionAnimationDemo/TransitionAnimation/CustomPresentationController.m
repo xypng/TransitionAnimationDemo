@@ -12,8 +12,6 @@
 
 @property (nonatomic, strong) UIView *dimmingView;
 
-@property (nonatomic, assign) CGFloat gestureBeginX;
-
 @end
 
 @implementation CustomPresentationController
@@ -27,9 +25,6 @@
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
     [self.dimmingView addGestureRecognizer:tap];
-
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognizer:)];
-    [self.presentedViewController.view addGestureRecognizer:pan];
 
     [self.presentedViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self.dimmingView.alpha = 0.5;
@@ -50,42 +45,6 @@
 
 - (void)tapRecognizer:(UITapGestureRecognizer *)gesture {
     [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)panRecognizer:(UIPanGestureRecognizer *)gesture {
-    CGFloat xOffset = [gesture translationInView:self.presentedViewController.view].x;
-    CGFloat percent = xOffset/((self.containerView.bounds.size.width-self.offset)-self.gestureBeginX);
-    percent = MIN(1, MAX(0, percent));
-    NSLog(@"percent: %.2f", percent);
-
-    switch (gesture.state) {
-        case UIGestureRecognizerStateBegan:
-        {
-            self.gestureBeginX = [gesture locationInView:self.presentedViewController.view].x;
-
-            self.interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc]init];
-            [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-        }
-            break;
-        case UIGestureRecognizerStateChanged:
-        {
-            [self.interactiveTransition updateInteractiveTransition:percent];
-        }
-            break;
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
-            if (percent>0.5) {
-                [self.interactiveTransition finishInteractiveTransition];
-            } else {
-                [self.interactiveTransition cancelInteractiveTransition];
-            }
-            self.interactiveTransition = nil;
-        }
-            break;
-        default:
-            break;
-    }
 }
 
 @end

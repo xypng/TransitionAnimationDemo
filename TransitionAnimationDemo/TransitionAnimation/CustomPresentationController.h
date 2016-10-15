@@ -12,8 +12,6 @@
 
 @property (nonatomic, assign) CGFloat minification;
 
-@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
-
 @property (nonatomic, assign) CGFloat offset;
 
 @end

@@ -13,4 +13,6 @@
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification;
 
+@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
+
 @end

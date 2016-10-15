@@ -52,14 +52,14 @@
 //}
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
-    return self.presentation.interactiveTransition;
+    return self.interactiveTransition;
 }
 
-- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source NS_AVAILABLE_IOS(8_0) {
-    self.presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
-    self.presentation.minification = self.minification;
-    self.presentation.offset = self.offset;
-    return self.presentation;
-}
+//- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source NS_AVAILABLE_IOS(8_0) {
+//    self.presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+//    self.presentation.minification = self.minification;
+//    self.presentation.offset = self.offset;
+//    return self.presentation;
+//}
 
 @end
