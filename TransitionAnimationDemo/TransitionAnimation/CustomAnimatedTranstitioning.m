@@ -49,6 +49,7 @@
 
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     CGFloat translation;
+    CGRect presentedViewFrame;
     CGAffineTransform presentedViewTransform = CGAffineTransformIdentity;
 
     switch (self.transigionDirection) {
@@ -59,9 +60,11 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(containerView.bounds.size.width, 0, translation, containerView.bounds.size.height);
                 presentedViewTransform = CGAffineTransformMakeTranslation(-translation, 0);
+                presentedViewFrame = CGRectMake(containerView.bounds.size.width-translation, 0, translation, containerView.bounds.size.height);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformMakeTranslation(translation, 0);
+                presentedViewFrame = CGRectMake(containerView.bounds.size.width, 0, translation, containerView.bounds.size.height);
             }
         }
             break;
@@ -72,9 +75,11 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(-translation, 0, translation, containerView.bounds.size.height);
                 presentedViewTransform = CGAffineTransformMakeTranslation(translation, 0);
+                presentedViewFrame = CGRectMake(0, 0, translation, containerView.bounds.size.height);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformMakeTranslation(-translation, 0);
+                presentedViewFrame = CGRectMake(-translation, 0, translation, containerView.bounds.size.height);
             }
         }
             break;
@@ -85,9 +90,11 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(0, -translation, containerView.bounds.size.width, translation);
                 presentedViewTransform = CGAffineTransformMakeTranslation(0, translation);
+                presentedViewFrame = CGRectMake(0, 0, containerView.bounds.size.width, translation);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformMakeTranslation(0, -translation);
+                presentedViewFrame = CGRectMake(0, -translation, containerView.bounds.size.width, translation);
             }
         }
             break;
@@ -98,9 +105,11 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(0,containerView.bounds.size.height, containerView.bounds.size.width, translation);
                 presentedViewTransform = CGAffineTransformMakeTranslation(0, -translation);
+                presentedViewFrame = CGRectMake(0, containerView.bounds.size.height-translation, containerView.bounds.size.width, translation);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformMakeTranslation(0, translation);
+                presentedViewFrame = CGRectMake(0, containerView.bounds.size.height, containerView.bounds.size.width, translation);
             }
         }
             break;
@@ -114,7 +123,8 @@
         [containerView addSubview:toView];
 
         [UIView animateWithDuration:duration animations:^{
-            toView.transform = presentedViewTransform;
+//            toView.transform = presentedViewTransform;
+            toView.frame = presentedViewFrame;
         } completion:^(BOOL finished) {
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];
@@ -123,7 +133,8 @@
     if (fromVC.isBeingDismissed) {
 
         [UIView animateWithDuration:duration animations:^{
-            fromView.transform = presentedViewTransform;
+//            fromView.transform = presentedViewTransform;
+            fromView.frame = presentedViewFrame;
         } completion:^(BOOL finished) {
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];
