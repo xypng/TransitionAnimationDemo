@@ -63,7 +63,7 @@
                 presentedViewFrame = CGRectMake(containerView.bounds.size.width-translation, 0, translation, containerView.bounds.size.height);
             }
             if (fromVC.isBeingDismissed) {
-                presentedViewTransform = CGAffineTransformMakeTranslation(translation, 0);
+                presentedViewTransform = CGAffineTransformIdentity;
                 presentedViewFrame = CGRectMake(containerView.bounds.size.width, 0, translation, containerView.bounds.size.height);
             }
         }
@@ -78,7 +78,7 @@
                 presentedViewFrame = CGRectMake(0, 0, translation, containerView.bounds.size.height);
             }
             if (fromVC.isBeingDismissed) {
-                presentedViewTransform = CGAffineTransformMakeTranslation(-translation, 0);
+                presentedViewTransform = CGAffineTransformIdentity;
                 presentedViewFrame = CGRectMake(-translation, 0, translation, containerView.bounds.size.height);
             }
         }
@@ -93,7 +93,7 @@
                 presentedViewFrame = CGRectMake(0, 0, containerView.bounds.size.width, translation);
             }
             if (fromVC.isBeingDismissed) {
-                presentedViewTransform = CGAffineTransformMakeTranslation(0, -translation);
+                presentedViewTransform = CGAffineTransformIdentity;
                 presentedViewFrame = CGRectMake(0, -translation, containerView.bounds.size.width, translation);
             }
         }
@@ -108,7 +108,7 @@
                 presentedViewFrame = CGRectMake(0, containerView.bounds.size.height-translation, containerView.bounds.size.width, translation);
             }
             if (fromVC.isBeingDismissed) {
-                presentedViewTransform = CGAffineTransformMakeTranslation(0, translation);
+                presentedViewTransform = CGAffineTransformIdentity;
                 presentedViewFrame = CGRectMake(0, containerView.bounds.size.height, containerView.bounds.size.width, translation);
             }
         }
@@ -123,8 +123,8 @@
         [containerView addSubview:toView];
 
         [UIView animateWithDuration:duration animations:^{
-//            toView.transform = presentedViewTransform;
-            toView.frame = presentedViewFrame;
+            toView.transform = presentedViewTransform;
+//            toView.frame = presentedViewFrame;
         } completion:^(BOOL finished) {
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];
@@ -133,8 +133,8 @@
     if (fromVC.isBeingDismissed) {
 
         [UIView animateWithDuration:duration animations:^{
-//            fromView.transform = presentedViewTransform;
-            fromView.frame = presentedViewFrame;
+            fromView.transform = presentedViewTransform;
+//            fromView.frame = presentedViewFrame;
         } completion:^(BOOL finished) {
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];
