@@ -15,23 +15,17 @@
 
 @property (nonatomic, assign) Direction transigionDirection;
 
-/**
- *  缩小率
- */
-@property (nonatomic, assign) CGFloat minification;
-
 @property (nonatomic, strong) CustomPresentationController *presentation;
 
 @end
 
 @implementation CustomTransitioningDelegate
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification {
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction {
     self = [super init];
     if (self) {
         _offset = offset;
         _transigionDirection = direction;
-        _minification = minification;
     }
     return self;
 }
@@ -39,12 +33,12 @@
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
-    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection andMinification:self.minification];
+    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
 
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection andMinification:self.minification];
+    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
 }
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator {

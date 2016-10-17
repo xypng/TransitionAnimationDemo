@@ -16,16 +16,17 @@
 
 @property (nonatomic, assign) CGFloat minification;
 
+@property (nonatomic, strong) UIView *presentingSuperview;
+
 @end
 
 @implementation CustomAnimatedTranstitioning
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification {
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction  {
     self = [super init];
     if (self) {
         _offset = offset;
         _transigionDirection = direction;
-        _minification = minification;
     }
     return self;
 }
@@ -127,14 +128,13 @@
         [UIView animateWithDuration:duration animations:^{
 
             dimmingView.alpha = 0.5;
-            if (self.minification>0.0 && self.minification<1.0) {
-                fromView.transform = CGAffineTransformScale(fromView.transform, self.minification, self.minification);
-            }
             toView.transform = presentedViewTransform;
 
         } completion:^(BOOL finished) {
+
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];
+
         }];
     }
     if (fromVC.isBeingDismissed) {
@@ -144,14 +144,13 @@
         [UIView animateWithDuration:duration animations:^{
 
             dimmingView.alpha = 0.0;
-            if (self.minification>0.0 && self.minification<1.0) {
-                toView.transform = CGAffineTransformIdentity;
-            }
             fromView.transform = presentedViewTransform;
 
         } completion:^(BOOL finished) {
+
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];
+
         }];
     }
 }

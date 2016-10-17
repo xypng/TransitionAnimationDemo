@@ -17,6 +17,6 @@ typedef enum : NSUInteger {
 
 @interface CustomAnimatedTranstitioning : NSObject <UIViewControllerAnimatedTransitioning>
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification;
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction;
 
 @end

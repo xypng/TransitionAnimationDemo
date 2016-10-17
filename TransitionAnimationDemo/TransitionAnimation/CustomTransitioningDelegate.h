@@ -11,7 +11,7 @@
 
 @interface CustomTransitioningDelegate : NSObject <UIViewControllerTransitioningDelegate>
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification;
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction;
 
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
 
