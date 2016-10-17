@@ -15,7 +15,7 @@ typedef enum : NSUInteger {
     Bottom,
 } EdgeDirection;
 
-@interface CustomAnimatedTranstitioning : NSObject <UIViewControllerAnimatedTransitioning>
+@interface PresentEdgeAnimatedTranstitioning : NSObject <UIViewControllerAnimatedTransitioning>
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction;
 

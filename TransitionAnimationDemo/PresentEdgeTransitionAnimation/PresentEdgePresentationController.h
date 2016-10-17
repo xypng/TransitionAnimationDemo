@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomPresentationController : UIPresentationController
+@interface PresentEdgePresentationController : UIPresentationController
 
 @property (nonatomic, assign) CGFloat minification;
 

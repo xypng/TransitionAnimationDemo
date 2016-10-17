@@ -8,13 +8,13 @@
 
 #import "PresentingViewController.h"
 #import "PresentedViewController.h"
-#import "CustomTransitioningDelegate.h"
+#import "PresentEdgeTransitioningDelegate.h"
 
 @interface PresentingViewController()
 
 @property (nonatomic, strong) PresentedViewController *presentedVC;
 
-@property (nonatomic, strong) CustomTransitioningDelegate *transitionDelegate;
+@property (nonatomic, strong) PresentEdgeTransitioningDelegate *transitionDelegate;
 
 /**
  *  手势起始的x位置
@@ -29,7 +29,7 @@
     [super viewDidLoad];
 
     self.presentedVC = [[PresentedViewController alloc] init];
-    self.transitionDelegate = [[CustomTransitioningDelegate alloc] initWithOffset:300 andDirection:Above];
+    self.transitionDelegate = [[PresentEdgeTransitioningDelegate alloc] initWithOffset:100 andDirection:Right];
     self.transitionDelegate.presentedVC = self.presentedVC;
     self.transitionDelegate.presentingVC = self;
     self.presentedVC.modalPresentationStyle = UIModalPresentationCustom;

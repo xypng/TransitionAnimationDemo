@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomAnimatedTranstitioning.h"
+#import "PresentEdgeAnimatedTranstitioning.h"
 
-@interface CustomTransitioningDelegate : NSObject <UIViewControllerTransitioningDelegate>
+@interface PresentEdgeTransitioningDelegate : NSObject <UIViewControllerTransitioningDelegate>
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction;
 

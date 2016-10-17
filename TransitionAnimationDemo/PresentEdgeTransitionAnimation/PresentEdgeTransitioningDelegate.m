@@ -6,14 +6,14 @@
 //  Copyright © 2016年 XiaoYiPeng. All rights reserved.
 //
 
-#import "CustomTransitioningDelegate.h"
-#import "CustomPresentationController.h"
+#import "PresentEdgeTransitioningDelegate.h"
+#import "PresentEdgePresentationController.h"
 
-@interface CustomTransitioningDelegate ()
+@interface PresentEdgeTransitioningDelegate ()
 
-@property (nonatomic, strong) CustomPresentationController *presentation;
+@property (nonatomic, strong) PresentEdgePresentationController *presentation;
 
-@property (nonatomic, strong) CustomAnimatedTranstitioning *animatedTransitioning;
+@property (nonatomic, strong) PresentEdgeAnimatedTranstitioning *animatedTransitioning;
 
 /**
  *  手势起始的x/y位置
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation CustomTransitioningDelegate
+@implementation PresentEdgeTransitioningDelegate
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction {
     self = [super init];
@@ -30,7 +30,7 @@
         _offset = offset;
         _transigionDirection = direction;
 
-        self.animatedTransitioning = [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
+        self.animatedTransitioning = [[PresentEdgeAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
         
     }
     return self;

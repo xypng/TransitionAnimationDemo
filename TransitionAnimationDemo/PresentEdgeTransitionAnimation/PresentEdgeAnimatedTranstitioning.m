@@ -6,9 +6,9 @@
 //  Copyright © 2016年 XiaoYiPeng. All rights reserved.
 //
 
-#import "CustomAnimatedTranstitioning.h"
+#import "PresentEdgeAnimatedTranstitioning.h"
 
-@interface CustomAnimatedTranstitioning ()
+@interface PresentEdgeAnimatedTranstitioning ()
 
 @property (nonatomic, assign) CGFloat offset;
 
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation CustomAnimatedTranstitioning
+@implementation PresentEdgeAnimatedTranstitioning
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction  {
     self = [super init];

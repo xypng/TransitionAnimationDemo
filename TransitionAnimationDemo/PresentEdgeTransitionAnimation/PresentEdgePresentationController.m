@@ -6,15 +6,15 @@
 //  Copyright © 2016年 XiaoYiPeng. All rights reserved.
 //
 
-#import "CustomPresentationController.h"
+#import "PresentEdgePresentationController.h"
 
-@interface CustomPresentationController ()
+@interface PresentEdgePresentationController ()
 
 @property (nonatomic, strong) UIView *dimmingView;
 
 @end
 
-@implementation CustomPresentationController
+@implementation PresentEdgePresentationController
 
 - (void)presentationTransitionWillBegin {
     self.dimmingView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];;
