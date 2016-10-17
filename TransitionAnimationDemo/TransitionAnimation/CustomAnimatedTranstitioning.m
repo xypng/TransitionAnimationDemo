@@ -14,15 +14,18 @@
 
 @property (nonatomic, assign) Direction transigionDirection;
 
+@property (nonatomic, assign) CGFloat minification;
+
 @end
 
 @implementation CustomAnimatedTranstitioning
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction {
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction andMinification:(CGFloat)minification {
     self = [super init];
     if (self) {
         _offset = offset;
         _transigionDirection = direction;
+        _minification = minification;
     }
     return self;
 }
@@ -38,18 +41,18 @@
     UIView *fromView;
     UIView *toView;
 
-    if ([transitionContext respondsToSelector:@selector(viewForKey:)]) {
-        fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
-        toView = [transitionContext viewForKey:UITransitionContextToViewKey];
-    } else {
+//    if ([transitionContext respondsToSelector:@selector(viewForKey:)]) {
+    //custom时返回nil了
+//        fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
+//        toView = [transitionContext viewForKey:UITransitionContextToViewKey];
+//    } else {
         //ios7
         fromView = fromVC.view;
         toView = toVC.view;
-    }
+//    }
 
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     CGFloat translation;
-    CGRect presentedViewFrame;
     CGAffineTransform presentedViewTransform = CGAffineTransformIdentity;
 
     switch (self.transigionDirection) {
@@ -60,11 +63,9 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(containerView.bounds.size.width, 0, translation, containerView.bounds.size.height);
                 presentedViewTransform = CGAffineTransformMakeTranslation(-translation, 0);
-                presentedViewFrame = CGRectMake(containerView.bounds.size.width-translation, 0, translation, containerView.bounds.size.height);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformIdentity;
-                presentedViewFrame = CGRectMake(containerView.bounds.size.width, 0, translation, containerView.bounds.size.height);
             }
         }
             break;
@@ -75,11 +76,9 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(-translation, 0, translation, containerView.bounds.size.height);
                 presentedViewTransform = CGAffineTransformMakeTranslation(translation, 0);
-                presentedViewFrame = CGRectMake(0, 0, translation, containerView.bounds.size.height);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformIdentity;
-                presentedViewFrame = CGRectMake(-translation, 0, translation, containerView.bounds.size.height);
             }
         }
             break;
@@ -90,11 +89,9 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(0, -translation, containerView.bounds.size.width, translation);
                 presentedViewTransform = CGAffineTransformMakeTranslation(0, translation);
-                presentedViewFrame = CGRectMake(0, 0, containerView.bounds.size.width, translation);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformIdentity;
-                presentedViewFrame = CGRectMake(0, -translation, containerView.bounds.size.width, translation);
             }
         }
             break;
@@ -105,11 +102,9 @@
             if (toVC.isBeingPresented) {
                 toView.frame = CGRectMake(0,containerView.bounds.size.height, containerView.bounds.size.width, translation);
                 presentedViewTransform = CGAffineTransformMakeTranslation(0, -translation);
-                presentedViewFrame = CGRectMake(0, containerView.bounds.size.height-translation, containerView.bounds.size.width, translation);
             }
             if (fromVC.isBeingDismissed) {
                 presentedViewTransform = CGAffineTransformIdentity;
-                presentedViewFrame = CGRectMake(0, containerView.bounds.size.height, containerView.bounds.size.width, translation);
             }
         }
             break;
@@ -119,12 +114,24 @@
 
     if (toVC.isBeingPresented) {
 
+        UIVisualEffectView *dimmingView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];;
+        [containerView addSubview:dimmingView];
+        dimmingView.bounds = containerView.bounds;
+        dimmingView.center = containerView.center;
+        dimmingView.alpha = 0.0;
+        dimmingView.tag = 101;
+
         //只有present时,toView才要加到containerView上, dismiss时不用
         [containerView addSubview:toView];
 
         [UIView animateWithDuration:duration animations:^{
+
+            dimmingView.alpha = 0.5;
+            if (self.minification>0.0 && self.minification<1.0) {
+                fromView.transform = CGAffineTransformScale(fromView.transform, self.minification, self.minification);
+            }
             toView.transform = presentedViewTransform;
-//            toView.frame = presentedViewFrame;
+
         } completion:^(BOOL finished) {
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];
@@ -132,9 +139,16 @@
     }
     if (fromVC.isBeingDismissed) {
 
+        UIVisualEffectView *dimmingView = [containerView viewWithTag:101];
+
         [UIView animateWithDuration:duration animations:^{
+
+            dimmingView.alpha = 0.0;
+            if (self.minification>0.0 && self.minification<1.0) {
+                toView.transform = CGAffineTransformIdentity;
+            }
             fromView.transform = presentedViewTransform;
-//            fromView.frame = presentedViewFrame;
+
         } completion:^(BOOL finished) {
             BOOL isCancle = [transitionContext transitionWasCancelled];
             [transitionContext completeTransition:!isCancle];

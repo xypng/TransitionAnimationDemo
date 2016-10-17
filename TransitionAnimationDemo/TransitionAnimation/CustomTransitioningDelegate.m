@@ -39,12 +39,12 @@
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
-    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
+    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection andMinification:self.minification];
 
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
+    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection andMinification:self.minification];
 }
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator {
@@ -55,11 +55,11 @@
     return self.interactiveTransition;
 }
 
-- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source NS_AVAILABLE_IOS(8_0) {
-    self.presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
-    self.presentation.minification = self.minification;
-    self.presentation.offset = self.offset;
-    return self.presentation;
-}
+//- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source NS_AVAILABLE_IOS(8_0) {
+//    self.presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+//    self.presentation.minification = self.minification;
+//    self.presentation.offset = self.offset;
+//    return self.presentation;
+//}
 
 @end

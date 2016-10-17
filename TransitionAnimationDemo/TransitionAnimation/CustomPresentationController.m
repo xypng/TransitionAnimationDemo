@@ -28,7 +28,7 @@
 
     [self.presentedViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self.dimmingView.alpha = 0.5;
-        if (self.minification>0.0) {
+        if (self.minification>0.0 && self.minification<1.0) {
             self.presentingViewController.view.transform = CGAffineTransformScale(self.presentingViewController.view.transform, self.minification, self.minification);
         }
     } completion:nil];
@@ -37,7 +37,7 @@
 - (void)dismissalTransitionWillBegin {
     [self.presentedViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self.dimmingView.alpha = 0.0;
-        if (self.minification>0.0) {
+        if (self.minification>0.0 && self.minification<1.0) {
             self.presentingViewController.view.transform = CGAffineTransformIdentity;
         }
     } completion:nil];
