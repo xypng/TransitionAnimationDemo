@@ -19,4 +19,6 @@ typedef enum : NSUInteger {
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction;
 
+@property (nonatomic, strong) UIVisualEffectView *dimmingView;
+
 @end

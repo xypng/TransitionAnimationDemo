@@ -11,11 +11,14 @@
 
 @interface CustomTransitioningDelegate ()
 
-@property (nonatomic, assign) CGFloat offset;
-
-@property (nonatomic, assign) EdgeDirection transigionDirection;
-
 @property (nonatomic, strong) CustomPresentationController *presentation;
+
+@property (nonatomic, strong) CustomAnimatedTranstitioning *animatedTransitioning;
+
+/**
+ *  手势起始的x位置
+ */
+@property (nonatomic, assign) CGFloat gestureBeginX;
 
 @end
 
@@ -26,19 +29,109 @@
     if (self) {
         _offset = offset;
         _transigionDirection = direction;
+
+        self.animatedTransitioning = [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
+        
     }
     return self;
 }
 
+- (void)setPresentingVC:(UIViewController *)presentingVC {
+    _presentingVC = presentingVC;
 
+    UIScreenEdgePanGestureRecognizer *edgePanGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(edgePan:)];
+    edgePanGesture.edges = UIRectEdgeRight;
+    [_presentingVC.view addGestureRecognizer:edgePanGesture];
+}
+
+- (void)edgePan:(UIScreenEdgePanGestureRecognizer *)gesture {
+    CGFloat xOffset = -[gesture translationInView:self.presentingVC.view].x;
+    CGFloat percent = xOffset/( self.gestureBeginX - self.offset );
+    percent = MIN(1, MAX(0, percent));
+    NSLog(@"Present Percent: %.2f", percent);
+
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            self.gestureBeginX = [gesture locationInView:self.presentingVC.view].x;
+            NSLog(@"beginX: %.2f", self.gestureBeginX);
+            self.interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc]init];
+            [self.presentingVC presentViewController:self.presentedVC animated:YES completion:nil];
+        }
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+            [self.interactiveTransition updateInteractiveTransition:percent];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        {
+            if (percent>0.5) {
+                [self.interactiveTransition finishInteractiveTransition];
+            } else {
+                [self.interactiveTransition cancelInteractiveTransition];
+            }
+            self.interactiveTransition = nil;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)setPresentedVC:(UIViewController *)presentedVC {
+    _presentedVC = presentedVC;
+
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognizer:)];
+    [_presentedVC.view addGestureRecognizer:pan];
+}
+
+- (void)panRecognizer:(UIPanGestureRecognizer *)gesture {
+    CGFloat xOffset = [gesture translationInView:self.presentedVC.view].x;
+    CGFloat percent = xOffset/((self.presentedVC.view.bounds.size.width)-self.gestureBeginX);
+    percent = MIN(1, MAX(0, percent));
+    NSLog(@"Dismiss Percent: %.2f", percent);
+
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            self.gestureBeginX = [gesture locationInView:self.presentedVC.view].x;
+
+            self.interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc]init];
+            [self.presentedVC dismissViewControllerAnimated:YES completion:nil];
+        }
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+            [self.interactiveTransition updateInteractiveTransition:percent];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        {
+            if (percent>0.5) {
+                [self.interactiveTransition finishInteractiveTransition];
+            } else {
+                [self.interactiveTransition cancelInteractiveTransition];
+            }
+            self.interactiveTransition = nil;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - <UIViewControllerTransitioningDelegate>
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
-    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
+    return self.animatedTransitioning;
 
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [[CustomAnimatedTranstitioning alloc] initWithOffset:self.offset andDirection:self.transigionDirection];
+    return self.animatedTransitioning;
 }
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator {

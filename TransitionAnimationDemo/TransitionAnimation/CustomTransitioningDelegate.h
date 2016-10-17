@@ -13,6 +13,14 @@
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction;
 
+@property (nonatomic, assign) CGFloat offset;
+
+@property (nonatomic, assign) EdgeDirection transigionDirection;
+
+@property (nonatomic, strong) UIViewController *presentingVC;
+
+@property (nonatomic, strong) UIViewController *presentedVC;
+
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
 
 @end

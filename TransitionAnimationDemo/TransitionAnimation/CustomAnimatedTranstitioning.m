@@ -14,9 +14,7 @@
 
 @property (nonatomic, assign) EdgeDirection transigionDirection;
 
-@property (nonatomic, assign) CGFloat minification;
-
-@property (nonatomic, strong) UIView *presentingSuperview;
+@property (nonatomic, strong) UIViewController *presentedVC;
 
 @end
 
@@ -27,8 +25,17 @@
     if (self) {
         _offset = offset;
         _transigionDirection = direction;
+
+        self.dimmingView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+        [self.dimmingView addGestureRecognizer:tap];
     }
     return self;
+}
+
+- (void)tapRecognizer:(UITapGestureRecognizer *)gesture {
+    [self.presentedVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
@@ -115,19 +122,20 @@
 
     if (toVC.isBeingPresented) {
 
-        UIVisualEffectView *dimmingView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];;
-        [containerView addSubview:dimmingView];
-        dimmingView.bounds = containerView.bounds;
-        dimmingView.center = containerView.center;
-        dimmingView.alpha = 0.0;
-        dimmingView.tag = 101;
+        self.presentedVC = toVC;
+
+        [containerView addSubview:self.dimmingView];
+        self.dimmingView.bounds = containerView.bounds;
+        self.dimmingView.center = containerView.center;
+        self.dimmingView.alpha = 0.0;
+        self.dimmingView.tag = 101;
 
         //只有present时,toView才要加到containerView上, dismiss时不用
         [containerView addSubview:toView];
 
         [UIView animateWithDuration:duration animations:^{
 
-            dimmingView.alpha = 0.5;
+            self.dimmingView.alpha = 1.0;
             toView.transform = presentedViewTransform;
 
         } completion:^(BOOL finished) {
