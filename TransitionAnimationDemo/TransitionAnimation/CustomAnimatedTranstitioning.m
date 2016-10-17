@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) CGFloat offset;
 
-@property (nonatomic, assign) Direction transigionDirection;
+@property (nonatomic, assign) EdgeDirection transigionDirection;
 
 @property (nonatomic, assign) CGFloat minification;
 
@@ -22,7 +22,7 @@
 
 @implementation CustomAnimatedTranstitioning
 
-- (instancetype)initWithOffset:(CGFloat)offset andDirection:(Direction)direction  {
+- (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction  {
     self = [super init];
     if (self) {
         _offset = offset;
