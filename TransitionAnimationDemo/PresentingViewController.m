@@ -14,12 +14,10 @@
 
 @property (nonatomic, strong) PresentedViewController *presentedVC;
 
-@property (nonatomic, strong) PresentEdgeTransitioningDelegate *transitionDelegate;
-
 /**
- *  手势起始的x位置
+ *  presentedView的transitioningDelegate
  */
-@property (nonatomic, assign) CGFloat gestureBeginX;
+@property (nonatomic, strong) PresentEdgeTransitioningDelegate *transitionDelegate;
 
 @end
 
@@ -29,7 +27,7 @@
     [super viewDidLoad];
 
     self.presentedVC = [[PresentedViewController alloc] init];
-    self.transitionDelegate = [[PresentEdgeTransitioningDelegate alloc] initWithOffset:100 andDirection:Right];
+    self.transitionDelegate = [[PresentEdgeTransitioningDelegate alloc] initWithOffset:300 andDirection:Bottom];
     self.transitionDelegate.presentedVC = self.presentedVC;
     self.transitionDelegate.presentingVC = self;
     self.presentedVC.modalPresentationStyle = UIModalPresentationCustom;

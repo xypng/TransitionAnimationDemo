@@ -14,7 +14,15 @@
 
 @property (nonatomic, assign) EdgeDirection transigionDirection;
 
+/**
+ *  记录presentedViewController,点灰色背景时dismiss用
+ */
 @property (nonatomic, strong) UIViewController *presentedVC;
+
+/**
+ *  灰色背景
+ */
+@property (nonatomic, strong) UIVisualEffectView *dimmingView;
 
 @end
 
@@ -38,6 +46,8 @@
     [self.presentedVC dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - <UIViewControllerAnimatedTransitioning>
+//动画完成的时长
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
     return 0.5;
 }
@@ -50,7 +60,7 @@
     UIView *toView;
 
 //    if ([transitionContext respondsToSelector:@selector(viewForKey:)]) {
-    //custom时返回nil了
+    //custom时返回nil了，所以干脆不用它了
 //        fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
 //        toView = [transitionContext viewForKey:UITransitionContextToViewKey];
 //    } else {
@@ -135,7 +145,7 @@
 
         [UIView animateWithDuration:duration animations:^{
 
-            self.dimmingView.alpha = 1.0;
+            self.dimmingView.alpha = 0.5;
             toView.transform = presentedViewTransform;
 
         } completion:^(BOOL finished) {

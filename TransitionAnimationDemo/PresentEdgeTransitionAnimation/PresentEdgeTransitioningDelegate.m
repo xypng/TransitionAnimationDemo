@@ -20,6 +20,11 @@
  */
 @property (nonatomic, assign) CGFloat gestureBegin;
 
+/**
+ *  交互手势完成比例
+ */
+@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
+
 @end
 
 @implementation PresentEdgeTransitioningDelegate
@@ -36,6 +41,11 @@
     return self;
 }
 
+/**
+ *  设置 presentedViewControlerr的边缘手势
+ *
+ *  @param presentingVC presentingViewController
+ */
 - (void)setPresentingVC:(UIViewController *)presentingVC {
     _presentingVC = presentingVC;
 
@@ -44,24 +54,29 @@
         return;
     }
 
-    UIScreenEdgePanGestureRecognizer *edgePanGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(edgePan:)];
+    self.edgePanGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(edgePan:)];
     switch (self.transigionDirection) {
         case Right:
         {
-            edgePanGesture.edges = UIRectEdgeRight;
+            self.edgePanGesture.edges = UIRectEdgeRight;
         }
             break;
         case Left:
         {
-            edgePanGesture.edges = UIRectEdgeLeft;
+            self.edgePanGesture.edges = UIRectEdgeLeft;
         }
             break;
         default:
             break;
     }
-    [_presentingVC.view addGestureRecognizer:edgePanGesture];
+    [_presentingVC.view addGestureRecognizer:self.edgePanGesture];
 }
 
+/**
+ *  presentingViewController的边缘手势
+ *
+ *  @param gesture 手势
+ */
 - (void)edgePan:(UIScreenEdgePanGestureRecognizer *)gesture {
     CGFloat offset;
     CGFloat percent;
@@ -116,13 +131,23 @@
     }
 }
 
+/**
+ *  设置presentedViewController时，设置它的拖动手势
+ *
+ *  @param presentedVC presentedViewcontroller
+ */
 - (void)setPresentedVC:(UIViewController *)presentedVC {
     _presentedVC = presentedVC;
 
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognizer:)];
-    [_presentedVC.view addGestureRecognizer:pan];
+    self.pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognizer:)];
+    [_presentedVC.view addGestureRecognizer:self.pan];
 }
 
+/**
+ *  presentedViewController的拖动手势
+ *
+ *  @param gesture 手势
+ */
 - (void)panRecognizer:(UIPanGestureRecognizer *)gesture {
     CGFloat offset;
     CGFloat percent;
@@ -204,24 +229,26 @@
 }
 
 #pragma mark - <UIViewControllerTransitioningDelegate>
+//返回动画对象
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
 
     return self.animatedTransitioning;
 
 }
-
+//返回动画对象
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     return self.animatedTransitioning;
 }
-
+//交互控制对象，由手势控制产生，并更新，手势完成时变回nil
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator {
     return self.interactiveTransition;
 }
-
+//交互控制对象，由手势控制产生，并更新，手势完成时变回nil
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
     return self.interactiveTransition;
 }
 
+//返回presentationController，作一些额外的动画，为了兼容iOS7,弃用它，在animatedTransitioning一样完成
 //- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source NS_AVAILABLE_IOS(8_0) {
 //    self.presentation = [[CustomPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
 //    self.presentation.minification = self.minification;

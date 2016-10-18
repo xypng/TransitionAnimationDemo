@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *   边缘滑出的方向
+ */
 typedef enum : NSUInteger {
     Right,
     Left,
@@ -18,7 +21,5 @@ typedef enum : NSUInteger {
 @interface PresentEdgeAnimatedTranstitioning : NSObject <UIViewControllerAnimatedTransitioning>
 
 - (instancetype)initWithOffset:(CGFloat)offset andDirection:(EdgeDirection)direction;
-
-@property (nonatomic, strong) UIVisualEffectView *dimmingView;
 
 @end
