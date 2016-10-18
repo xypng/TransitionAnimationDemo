@@ -27,7 +27,7 @@
     [super viewDidLoad];
 
     self.presentedVC = [[PresentedViewController alloc] init];
-    self.transitionDelegate = [[PresentEdgeTransitioningDelegate alloc] initWithOffset:300 andDirection:Bottom];
+    self.transitionDelegate = [[PresentEdgeTransitioningDelegate alloc] initWithOffset:100 andDirection:Right];
     self.transitionDelegate.presentedVC = self.presentedVC;
     self.transitionDelegate.presentingVC = self;
     self.presentedVC.modalPresentationStyle = UIModalPresentationCustom;
